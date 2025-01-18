@@ -7,9 +7,10 @@ connectToMongo();
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+//Available routes are these
+//these routes are defined in some other files in routes folder
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/notes', require('./routes/notes'))
 
 //app ko run kiya
 app.listen(port, () => {
