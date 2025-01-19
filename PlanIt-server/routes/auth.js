@@ -4,10 +4,15 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetchuser = require("../middleware/fetchUser")
 
 const JWT_SECRET = "yashiiiiiieeeeee";
 
-//////////////////////////// Create a new User [ POST : /api/auth/createuser ] No login required ////////////////////////////////
+
+
+//////////////////////////////////////////////  ROUTE 1  ///////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// Create a new User [ POST : /api/auth/createuser ] No login required ///////////////////////////////////////////////////
+
 router.post("/createuser", [body("name", "Name should be of atleast 3 characters").isLength({ min: 3 }), body("email", "Please enter a valid email").isEmail(), body("password", "Password should be of atleast 5 characters").isLength({ min: 5 })], async (req, res) => {
     //if there is error, return bad request and error (this is a part from express-validator)
     const errors = validationResult(req);
@@ -42,14 +47,19 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
         const authToken = jwt.sign(data, JWT_SECRET);
 
         res.json({ authToken }); //response returned ater creating user
-    } catch (error) {
+    }
+    catch (error) {
         //error shown if any error is occoured
         console.log(error);
         res.status(500).send("Internal Server Error..");
     }
 });
 
-////////////////////////////Authenticate a User [ POST : /api/auth/login ] No login required ////////////////////////////////
+
+
+////////////////////////////////////////////////////  ROUTE 2  //////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// Authenticate a User [ POST : /api/auth/login ] No login required ///////////////////////////////////////////////////////
+
 router.post("/login", [body("email", "Please enter a valid email").isEmail(), body("password", "Password cannot be blank").exists()], async (req, res) => {
     //if there is error, return bad request and error (this is a part from express-validator)
     const errors = validationResult(req);
@@ -79,10 +89,30 @@ router.post("/login", [body("email", "Please enter a valid email").isEmail(), bo
         };
         const authToken = jwt.sign(data, JWT_SECRET);
         res.json({ authToken }); //response returned ater creating user
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
         res.status(500).send("Internal Server Error..");
     }
 });
+
+
+
+////////////////////////////////////////////////////  ROUTE 3  //////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// Get User Details [ POST : /api/auth/login ] Login required /////////////////////////////////////////////////////////////
+
+// this route is same as route 2 but it returns user details instead of token
+router.post("/getuser", fetchuser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findById(userId).select("-password")
+        res.send(user);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error..");
+    }
+    
+})
 
 module.exports = router;
