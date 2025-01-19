@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "yashiiiiiieeeeee"
+const JWT_SECRET = "yashiiiiiieeeeee";
 
-//create a new user [ POST : /api/auth/createuser ]
-//No login required
-router.post("/createuser", [body("name", "Name should be of atleast 3 characters").isLength({ min: 3 }), body("email", "Please enter a valid email").isEmail(), body("password", "Name should be of atleast 5 characters").isLength({ min: 5 })], async (req, res) => {
+//////////////////////////// Create a new User [ POST : /api/auth/createuser ] No login required ////////////////////////////////
+router.post("/createuser", [body("name", "Name should be of atleast 3 characters").isLength({ min: 3 }), body("email", "Please enter a valid email").isEmail(), body("password", "Password should be of atleast 5 characters").isLength({ min: 5 })], async (req, res) => {
     //if there is error, return bad request and error (this is a part from express-validator)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -28,7 +27,6 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-
         // Otherwise a new user is created
         user = await User.create({
             name: req.body.name,
@@ -38,19 +36,52 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
 
         const data = {
             user: {
-                id : user.id
-        }
-    }
-        const authToken = jwt.sign(data, JWT_SECRET)
-        console.log(authToken);
-        
+                id: user.id,
+            },
+        };
+        const authToken = jwt.sign(data, JWT_SECRET);
 
-        res.json({authToken});  //response returned ater creating user
-    } 
-    //error shown if any error is occoured
-    catch (error) {
+        res.json({ authToken }); //response returned ater creating user
+    } catch (error) {
+        //error shown if any error is occoured
         console.log(error);
-        res.status(500).send("Some Error Occured");
+        res.status(500).send("Internal Server Error..");
+    }
+});
+
+////////////////////////////Authenticate a User [ POST : /api/auth/login ] No login required ////////////////////////////////
+router.post("/login", [body("email", "Please enter a valid email").isEmail(), body("password", "Password cannot be blank").exists()], async (req, res) => {
+    //if there is error, return bad request and error (this is a part from express-validator)
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    // get the email and password given by the user by descructuring it from request.body
+    const { email, password } = req.body;
+    try {
+        // find a user from database with the same email entered by user
+        let user = await User.findOne({ email });
+        // if email entered by user did not match with any email in database then show this error
+        if (!user) {
+            return res.status(400).json({ error: "Please try to login with correct credentials!" });
+        }
+        // otherwise (if an email was found) then compare the password entered by user with the password of that user stored in the database
+        const passwordCompare = await bcrypt.compare(password, user.password); //hashing the password and then comparing happens internally in the compare function
+        // if it returns false means the password did not match then show this error
+        if (!passwordCompare) {
+            return res.status(400).json({ error: "Please try to login with correct credentials!" });
+        }
+        // if the password matched then create a token for the user
+        const data = {
+            user: {
+                id: user.id,
+            },
+        };
+        const authToken = jwt.sign(data, JWT_SECRET);
+        res.json({ authToken }); //response returned ater creating user
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error..");
     }
 });
 
