@@ -1,21 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     return (
         <nav className="navbar bg-base-100">
             <div className="flex-1">
-                <Link to="/" className="btn btn-ghost text-xl">
+                <Link to="/" className="text-pink font-serif font-bold p-3 text-xl">
                     PlanIt
                 </Link>
             </div>
             <div className="flex-none gap-4">
-                <ul className="menu menu-horizontal px-1">
-                    <li>
-                        <Link to="/about">About</Link>
+                <ul className="menu-horizontal px-1">
+                    <li className="p-3">
+                        <NavLink to="/about" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>About</NavLink>
                     </li>
-                    <li>
-                    <Link to="/contact">Contact</Link>
+                    <li className="p-3">
+                    <NavLink to="/contact" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>Contact</NavLink>
                     </li>
                 </ul>
                 <div className="dropdown dropdown-end">
