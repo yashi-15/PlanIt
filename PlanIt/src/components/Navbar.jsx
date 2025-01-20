@@ -3,9 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <nav className="navbar bg-base-100">
+        <div className="p-2">
+        <nav className="navbar bg-ashrose shadow-md rounded-lg">
             <div className="flex-1">
-                <Link to="/" className="text-pink font-serif font-bold p-3 text-xl">
+                <Link to="/" className="text-black font-serif font-bold p-3 text-xl">
                     PlanIt
                 </Link>
             </div>
@@ -41,6 +42,7 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
+        </div>
     );
 };
 
