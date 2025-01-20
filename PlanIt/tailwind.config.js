@@ -7,10 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // 'green': '#39a1c4',
-        // 'red': '#FF6868',
-        // 'secondary' : '#555',
-        // 'primary' : '#FCFCFC'
+        'red': '#F23834',
+        'linen': '#F0D1A8',
+        'cream' : '#FAF7F2',
+        'black' : '#0D0D0C',
+        'tasktext' : '#4B332F',
+        'tasktext2' : '#201713',
+        'amber' : '#F2B258',
+        'pink' : '#F87777',
+        'ashrose' : '#C4A49F',
+        'green' : '#5C9967',
+        'gray' : '#63605F',
       }
     },
   },
