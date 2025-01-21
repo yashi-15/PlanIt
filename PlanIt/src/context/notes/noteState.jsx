@@ -21,14 +21,97 @@ const NoteState = (props) => {
           "tag": "temp",
           "timeStamp": "2025-01-20T16:18:45.676Z",
           "__v": 0
+        },
+        {
+          "_id": "678e7765ee0ae025d1dd0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
+        },
+        {
+          "_id": "678e7765eed0ae025d1d0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
+        },
+        {
+          "_id": "678e7765ee0ade025d1d0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
+        }
+        ,
+        {
+          "_id": "678e7765eesa0ade02fd5d1d0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
+        }
+        ,
+        {
+          "_id": "678e7765ee0ade02fd5d1dsa0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
+        }
+        ,
+        {
+          "_id": "678e7765ee0aasde02fd5d1d0bff6",
+          "user": "678cd1cea716ec6a39ee9781",
+          "title": "Hello",
+          "description": "hello this is my new note",
+          "tag": "temp",
+          "timeStamp": "2025-01-20T16:18:45.676Z",
+          "__v": 0
         }
       ]
 
     const [notes, setNotes] = useState(notesInitial)
 
+    // Add a note
+    const addNote = (title, description, tag) => {
+      // api call
+      const note = {
+        "_id": "678e7765ee0aassade02fd5d1d0bff6",
+        "user": "678cd1cea716ec6a39ee9781",
+        "title": "added",
+        "description": "added",
+        "tag": "new",
+        "timeStamp": "2025-01-20T16:18:45.676Z",
+        "__v": 0
+      }
+      setNotes(notes.push(note))
+    }
+      
+
+    // Delete a note
+    const deleteNote = () => {
+      
+    }
+
+    // Edit a note
+    const editNote = () =>{
+
+    }
+
 
     return (
-        <NoteContext.Provider value={{notes, setNotes}}>
+        <NoteContext.Provider value={{notes, addNote, deleteNote, editNote}}>
             {props.children}
         </NoteContext.Provider>
     )

@@ -3,17 +3,20 @@ import noteContext from '../context/notes/noteContext'
 import NoteItem from './NoteItem'
 
 const Notes = () => {
-    const {notes, setNotes} = useContext(noteContext)
+    const {notes, addNote} = useContext(noteContext)
 
   return (
-    <div>
+    <div className=''>
       <h1> My notes</h1>
+      <div className='grid grid-cols-4 gap-3 justify-items-center px-5 mx-auto'>
+        
       {
         notes.map((note)=> {
-            return <NoteItem note={note} />
+          return <NoteItem note={note} />
         } )
       }
     </div>
+      </div>
   )
 }
 
