@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import noteContext from "../context/notes/noteContext";
 
 const AddNote = () => {
+    const { addNote } = useContext(noteContext);
+
+    const [note, setNote] = useState({ title: "", description: "", tag: "" });
+
+    const handleAddNote = (e) => {
+        e.preventDefault()
+        addNote(note.title, note.description, note.tag);
+        setNote({ title: "", description: "", tag: "" });
+    };
+
+    const onChangeInput = (e) => {
+        setNote({ ...note, [e.target.name]: e.target.value });
+    };
+
     return (
         <div className="flex justify-center">
             <div style={{ width: "50%" }}>
                 <div className="flex flex-col gap-2">
-                    <label className="input input-bordered flex items-center gap-2">
-                        <input type="text" className="grow" placeholder="Title" />
+                    <label htmlFor="title" className="input input-bordered flex items-center gap-2">
+                        <input type="text" id="title" name="title" className="grow" placeholder="Title" value={note.title} onChange={onChangeInput} />
                     </label>
-                    <textarea placeholder="Description" class="textarea textarea-bordered textarea-md w-full"></textarea>
-                    <label className="input input-bordered flex items-center gap-2">
-                        <input type="text" className="grow" placeholder="Tag" />
+                    <label htmlFor="description" className="flex items-center gap-2">
+                        <textarea placeholder="Description" id="description" name="description" className="textarea textarea-bordered textarea-md w-full" value={note.description} onChange={onChangeInput}></textarea>
+                    </label>
+                    <label htmlFor="tag" className="input input-bordered flex items-center gap-2">
+                        <input type="text" id="tag" name="tag" className="grow" placeholder="Tag" value={note.tag} onChange={onChangeInput} />
                     </label>
                     <div className="text-center">
-                        <button className="btn bg-green">Add Note</button>
+                        <button className="btn bg-green" onClick={handleAddNote}>
+                            Add Note
+                        </button>
                     </div>
                 </div>
             </div>

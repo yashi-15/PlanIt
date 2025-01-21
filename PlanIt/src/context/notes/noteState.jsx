@@ -89,13 +89,13 @@ const NoteState = (props) => {
       const note = {
         "_id": "678e7765ee0aassade02fd5d1d0bff6",
         "user": "678cd1cea716ec6a39ee9781",
-        "title": "added",
-        "description": "added",
-        "tag": "new",
+        "title": title,
+        "description": description,
+        "tag": tag,
         "timeStamp": "2025-01-20T16:18:45.676Z",
         "__v": 0
       }
-      setNotes(notes.push(note))
+      setNotes(notes.concat(note))
     }
       
 

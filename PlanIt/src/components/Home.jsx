@@ -1,7 +1,6 @@
 import React from 'react'
 import heroImg from '../../public/hero.svg'
 import Notes from './Notes'
-import AddNote from './AddNote'
 
 const Home = () => {
   return (
@@ -21,7 +20,6 @@ const Home = () => {
 </div>
 
 
-<AddNote />
 <Notes />
 
     </>

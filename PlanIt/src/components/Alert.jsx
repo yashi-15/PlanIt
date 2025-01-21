@@ -2,7 +2,7 @@ import React from 'react'
 
 const Alert = () => {
   return (
-      <div role="alert" className="alert alert-success">
+      <div role="alert" className="alert bg-pink alert-success">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-6 w-6 shrink-0 stroke-current"
