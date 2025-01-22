@@ -32,16 +32,16 @@ const EditNoteModal = (props) => {
                     <h3 className="font-bold text-lg">Edit note!</h3>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="etitle" className="input input-bordered flex items-center gap-2">
-                            <input type="text" id="etitle" name="etitle" className="grow" placeholder="Title" value={note.etitle} onChange={onChangeInput} />
+                            <input type="text" id="etitle" name="etitle" className="grow" placeholder="Title" value={note.etitle} onChange={onChangeInput} minLength={3} required />
                         </label>
                         <label htmlFor="edescription" className="flex items-center gap-2">
-                            <textarea placeholder="Description" id="edescription" name="edescription" className="textarea textarea-bordered textarea-md w-full" value={note.edescription} onChange={onChangeInput}></textarea>
+                            <textarea placeholder="Description" id="edescription" name="edescription" className="textarea textarea-bordered textarea-md w-full" value={note.edescription} onChange={onChangeInput} minLength={5} required ></textarea>
                         </label>
                         <label htmlFor="etag" className="input input-bordered flex items-center gap-2">
                             <input type="text" id="etag" name="etag" className="grow" placeholder="Tag" value={note.etag} onChange={onChangeInput} />
                         </label>
                         <div className="text-center">
-                            <button className="btn bg-green" onClick={handleEditNote}>
+                            <button disabled={note.etitle.length < 3 || note.edescription.length < 5 } className="btn bg-green" onClick={handleEditNote}>
                                 Update Note
                             </button>
                         </div>
