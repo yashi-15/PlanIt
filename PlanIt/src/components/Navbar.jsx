@@ -13,6 +13,9 @@ const Navbar = () => {
             <div className="flex-none gap-4">
                 <ul className="menu-horizontal px-1">
                     <li className="p-3">
+                        <NavLink to="/mynotes" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>My Notes</NavLink>
+                    </li>
+                    <li className="p-3">
                         <NavLink to="/about" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>About</NavLink>
                     </li>
                     <li className="p-3">
