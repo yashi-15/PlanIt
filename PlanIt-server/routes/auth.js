@@ -14,10 +14,11 @@ const JWT_SECRET = "yashiiiiiieeeeee";
 //////////////////////////// Create a new User [ POST : /api/auth/createuser ] No login required ///////////////////////////////////////////////////
 
 router.post("/createuser", [body("name", "Name should be of atleast 3 characters").isLength({ min: 3 }), body("email", "Please enter a valid email").isEmail(), body("password", "Password should be of atleast 5 characters").isLength({ min: 5 })], async (req, res) => {
+    let success = false;
     //if there is error, return bad request and error (this is a part from express-validator)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success, error: errors.array() });
     }
 
     try {
@@ -26,7 +27,7 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
         // if a user is returned from above then show an error
         if (user) {
             // Function is returned here if the user already exists
-            return res.status(400).json({ error: "User with this email already exists" });
+            return res.status(400).json({ success, error: "User with this email already exists" });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -45,13 +46,13 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
             },
         };
         const authToken = jwt.sign(data, JWT_SECRET);
-
-        res.json({ authToken }); //response returned ater creating user
+        success = true;
+        res.json({ success, authToken }); //response returned ater creating user
     }
     catch (error) {
         //error shown if any error is occoured
         console.log(error);
-        res.status(500).send("Internal Server Error..");
+        res.status(500).json({ success, error: "Internal Server Error.."});
     }
 });
 
@@ -61,10 +62,11 @@ router.post("/createuser", [body("name", "Name should be of atleast 3 characters
 //////////////////////////// Authenticate a User [ POST : /api/auth/login ] No login required ///////////////////////////////////////////////////////
 
 router.post("/login", [body("email", "Please enter a valid email").isEmail(), body("password", "Password cannot be blank").exists()], async (req, res) => {
+    let success = false;
     //if there is error, return bad request and error (this is a part from express-validator)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success, error: errors.array() });
     }
     // get the email and password given by the user by descructuring it from request.body
     const { email, password } = req.body;
@@ -73,13 +75,13 @@ router.post("/login", [body("email", "Please enter a valid email").isEmail(), bo
         let user = await User.findOne({ email });
         // if email entered by user did not match with any email in database then show this error
         if (!user) {
-            return res.status(400).json({ error: "Please try to login with correct credentials!" });
+            return res.status(400).json({ success, error: "Please try to login with correct credentials!" });
         }
         // otherwise (if an email was found) then compare the password entered by user with the password of that user stored in the database
         const passwordCompare = await bcrypt.compare(password, user.password); //hashing the password and then comparing happens internally in the compare function
         // if it returns false means the password did not match then show this error
         if (!passwordCompare) {
-            return res.status(400).json({ error: "Please try to login with correct credentials!" });
+            return res.status(400).json({ success, error: "Please try to login with correct credentials!" });
         }
         // if the password matched then create a token for the user
         const data = {
@@ -88,11 +90,12 @@ router.post("/login", [body("email", "Please enter a valid email").isEmail(), bo
             },
         };
         const authToken = jwt.sign(data, JWT_SECRET);
-        res.json({ authToken }); //response returned ater creating user
+        success = true
+        res.json({ success, authToken }); //response returned ater creating user
     }
     catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error..");
+        res.status(500).json({ success, error: "Internal Server Error.."});
     }
 });
 
@@ -103,14 +106,16 @@ router.post("/login", [body("email", "Please enter a valid email").isEmail(), bo
 
 // this route is same as route 2 but it returns user details instead of token
 router.post("/getuser", fetchuser, async (req, res) => {
+    let success = false;
     try {
         const userId = req.user.id;
         const user = await User.findById(userId).select("-password")
-        res.send(user);
+        success = true;
+        res.send({ success, user});
     }
     catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error..");
+        res.status(500).send({ success, error: "Internal Server Error.."});
     }
     
 })

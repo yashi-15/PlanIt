@@ -9,23 +9,26 @@ import Contact from "./components/Contact";
 import NoteState from "./context/notes/noteState";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import AuthState from "./context/auth/authState";
 
 function App() {
     return (
-        <NoteState>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route path="" element={<Home />} />
-                        <Route path="mynotes" element={<Notes />} />
-                        <Route path="about" element={<About />} />
-                        <Route path="contact" element={<Contact />} />
-                        <Route path="login" element={<Login />} />
-                        <Route path="signup" element={<Signup />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </NoteState>
+        <AuthState>
+            <NoteState>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route path="" element={<Home />} />
+                            <Route path="mynotes" element={<Notes />} />
+                            <Route path="about" element={<About />} />
+                            <Route path="contact" element={<Contact />} />
+                            <Route path="login" element={<Login />} />
+                            <Route path="signup" element={<Signup />} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </NoteState>
+        </AuthState>
     );
 }
 
