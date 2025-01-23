@@ -50,9 +50,12 @@ const AuthState = (props) => {
             body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password }),
         });
         const json = await response.json();
-        console.log(json);
-
-        setUser(json);
+        if (json.success) {
+            localStorage.setItem("token", json.authToken);
+            getUser(json.authToken);
+        } else {
+            alert("Invalid Credentials");
+        }
     };
 
     return <authContext.Provider value={{ user, getUser, userLogin, userSignup }}>{props.children}</authContext.Provider>;

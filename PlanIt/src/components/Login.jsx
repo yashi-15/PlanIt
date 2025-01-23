@@ -3,7 +3,7 @@ import authContext from "../context/auth/authContext";
 
 const Login = () => {
 
-    const {user, userLogin} = useContext(authContext)
+    const {userLogin} = useContext(authContext)
     const [credentials, setCredentials] = useState({email: "", password: ""})
 
     const onChangeInput = (e) => {
