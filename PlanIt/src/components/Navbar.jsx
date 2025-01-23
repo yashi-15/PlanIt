@@ -21,6 +21,12 @@ const Navbar = () => {
                     <li className="p-3">
                     <NavLink to="/contact" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>Contact</NavLink>
                     </li>
+                    <li className="p-3">
+                    <NavLink to="/login" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>Login</NavLink>
+                    </li>
+                    <li className="p-3">
+                    <NavLink to="/signup" className={({isActive}) => `${isActive ?  "text-red" : "text-black"}`}>Signup</NavLink>
+                    </li>
                 </ul>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
