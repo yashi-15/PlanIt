@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import EditNoteModal from "./EditNoteModal";
+import alertContext from "../context/alert/alertContext";
 
 const NoteItem = (props) => {
     const { note } = props;
     const { deleteNote } = useContext(noteContext);
+    const {showAlert} = useContext(alertContext)
 
     const handleDeleteNote = () => {
         deleteNote(note._id);
+        showAlert("Deleted successfully!", "success")
     };
 
     const [currentNote, setCurrentnote] = useState(null);

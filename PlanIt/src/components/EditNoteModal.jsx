@@ -1,15 +1,18 @@
 import React, {useContext, useEffect, useState} from "react";
 import noteContext from "../context/notes/noteContext";
+import alertContext from "../context/alert/alertContext";
 
 const EditNoteModal = (props) => {
     const {currentNote, closeModal} = props;
     const [note, setNote] = useState({ id: currentNote._id , etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag });
 
     const { editNote } = useContext(noteContext);
+    const {showAlert} = useContext(alertContext)
 
     const handleEditNote = (e) => {
         editNote(note.id, note.etitle, note.edescription, note.etag)
         closeModal()
+        showAlert("Updated successfullly!", "success")
     };
 
     const onChangeInput = (e) => {
