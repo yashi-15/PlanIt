@@ -31,12 +31,7 @@ const AuthState = (props) => {
             body: JSON.stringify({ email: credentials.email, password: credentials.password }),
         });
         const json = await response.json();
-        if (json.success) {
-            localStorage.setItem("token", json.authToken);
-            getUser(json.authToken);
-        } else {
-            alert("Invalid Credentials");
-        }
+        return json
     };
 
     // User Login
@@ -50,12 +45,7 @@ const AuthState = (props) => {
             body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password }),
         });
         const json = await response.json();
-        if (json.success) {
-            localStorage.setItem("token", json.authToken);
-            getUser(json.authToken);
-        } else {
-            alert("Invalid Credentials");
-        }
+        return json
     };
 
     return <authContext.Provider value={{ user, getUser, userLogin, userSignup }}>{props.children}</authContext.Provider>;

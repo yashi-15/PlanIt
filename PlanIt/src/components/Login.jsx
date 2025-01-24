@@ -1,7 +1,10 @@
 import React, { useContext, useState } from "react";
 import authContext from "../context/auth/authContext";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const {userLogin} = useContext(authContext)
     const [credentials, setCredentials] = useState({email: "", password: ""})
@@ -10,9 +13,17 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    const handleLoginSubmit = (e) =>{
+    const handleLoginSubmit = async (e) =>{
         e.preventDefault()
-        userLogin(credentials)
+        const response = await userLogin(credentials)
+        if(response.success) {
+            localStorage.setItem("token", response.authToken);
+            navigate("/")
+        }
+        else{
+            console.log(response)
+            console.log("Invalid Credentials");
+        }
     }
 
     return (
