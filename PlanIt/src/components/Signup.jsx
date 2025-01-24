@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import authContext from "../context/auth/authContext";
 import { useNavigate } from 'react-router-dom';
+import alertContext from "../context/alert/alertContext";
 
 const Signup = () => {
 
     const navigate = useNavigate();
+
+    const {showAlert} = useContext(alertContext)
 
     const {user, userSignup} = useContext(authContext)
     const [credentials, setCredentials] = useState({name: "", email: "", password: "", cpassword: ""})
@@ -19,10 +22,10 @@ const Signup = () => {
         if(response.success) {
             localStorage.setItem("token", response.authToken);
             navigate("/")
+            showAlert("Sign Up Successfull!", "success")
         }
         else{
-            console.log(response);
-            console.log("Invalid Credentials");
+            showAlert(response.error, "error")
         }
     };
 

@@ -25,7 +25,6 @@ const Login = () => {
             showAlert("Logged In Successfully!", "success")
         }
         else{
-            console.log(response)
             showAlert(response.error, "error")
         }
     }
