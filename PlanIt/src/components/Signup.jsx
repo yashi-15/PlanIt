@@ -21,8 +21,8 @@ const Signup = () => {
         const response = await userSignup(credentials)
         if(response.success) {
             localStorage.setItem("token", response.authToken);
-            navigate("/")
             showAlert("Sign Up Successfull!", "success")
+            navigate("/")
         }
         else{
             showAlert(response.error, "error")

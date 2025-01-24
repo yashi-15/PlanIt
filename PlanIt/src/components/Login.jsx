@@ -21,8 +21,8 @@ const Login = () => {
         const response = await userLogin(credentials)
         if(response.success) {
             localStorage.setItem("token", response.authToken);
-            navigate("/")
             showAlert("Logged In Successfully!", "success")
+            navigate("/")
         }
         else{
             showAlert(response.error, "error")
