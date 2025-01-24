@@ -1,12 +1,15 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import alertContext from "../context/alert/alertContext";
 
 const Navbar = () => {
 
+    const {showAlert} = useContext(alertContext)
     const navigate = useNavigate();
 
     const handleLogout = () =>{
         localStorage.removeItem('token');
+        showAlert("Logout Successfull!", "success")
         navigate("/")
     }
 

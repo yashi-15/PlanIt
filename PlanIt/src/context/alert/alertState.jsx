@@ -8,7 +8,7 @@ const AlertState = (props) => {
         setAlert({message, type});
         setTimeout(() => {
             setAlert(null);
-        }, 1500)
+        }, 2000)
     }
 
     return <alertContext.Provider value={{ alert, showAlert}}>{props.children}</alertContext.Provider>;
