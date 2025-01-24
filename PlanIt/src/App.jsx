@@ -10,11 +10,13 @@ import NoteState from "./context/notes/noteState";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AuthState from "./context/auth/authState";
+import AlertState from "./context/alert/alertState";
 
 function App() {
     return (
         <AuthState>
             <NoteState>
+                <AlertState>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Layout />}>
@@ -27,6 +29,7 @@ function App() {
                         </Route>
                     </Routes>
                 </BrowserRouter>
+                </AlertState>
             </NoteState>
         </AuthState>
     );

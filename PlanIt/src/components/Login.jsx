@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import authContext from "../context/auth/authContext";
 import { useNavigate } from 'react-router-dom';
+import alertContext from "../context/alert/alertContext";
 
 const Login = () => {
 
     const navigate = useNavigate();
+
+    const {showAlert} = useContext(alertContext)
 
     const {userLogin} = useContext(authContext)
     const [credentials, setCredentials] = useState({email: "", password: ""})
@@ -19,10 +22,11 @@ const Login = () => {
         if(response.success) {
             localStorage.setItem("token", response.authToken);
             navigate("/")
+            showAlert("Logged In Successfully!", "success")
         }
         else{
             console.log(response)
-            console.log("Invalid Credentials");
+            showAlert(response.error, "error")
         }
     }
 
