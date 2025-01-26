@@ -17,6 +17,7 @@ const AuthState = (props) => {
         });
         const json = await response.json();
         setUser(json.user);
+        console.log(user);
         
     };
 
@@ -31,6 +32,9 @@ const AuthState = (props) => {
             body: JSON.stringify({ email: credentials.email, password: credentials.password }),
         });
         const json = await response.json();
+        if (json.success) {
+            getUser(json.authToken);
+        }
         return json
     };
 
@@ -45,10 +49,18 @@ const AuthState = (props) => {
             body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password }),
         });
         const json = await response.json();
+        if (json.success) {
+            getUser(json.authToken);
+        }
         return json
     };
 
-    return <authContext.Provider value={{ user, getUser, userLogin, userSignup }}>{props.children}</authContext.Provider>;
+    //User Logout
+    const userLogout = () => {
+        setUser({})
+    }
+
+    return <authContext.Provider value={{ user, getUser, userLogin, userSignup, userLogout }}>{props.children}</authContext.Provider>;
 };
 
 export default AuthState;

@@ -8,7 +8,7 @@ const Login = () => {
 
     const { showAlert } = useContext(alertContext);
 
-    const { userLogin } = useContext(authContext);
+    const { user, userLogin } = useContext(authContext);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
     const onChangeInput = (e) => {
@@ -20,8 +20,8 @@ const Login = () => {
         const response = await userLogin(credentials);
         if (response.success) {
             localStorage.setItem("token", response.authToken);
-            navigate("/");
             showAlert("Logged In Successfully!", "success");
+            navigate("/userdashboard");
         } else {
             showAlert(response.error, "error");
         }

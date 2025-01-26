@@ -19,6 +19,7 @@ export default {
         'green' : '#5C9967',
         'lightgreen' : '#73a17d',
         'gray' : '#63605F',
+        'darkgray' : '#1a1919',
       }
     },
   },

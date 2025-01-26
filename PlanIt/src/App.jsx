@@ -11,6 +11,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AuthState from "./context/auth/authState";
 import AlertState from "./context/alert/alertState";
+import HomeDashboard from "./components/user-dashboard/HomeDashboard";
+import LayoutDashboard from "./components/user-dashboard/LayoutDashboard";
 
 function App() {
     return (
@@ -26,6 +28,9 @@ function App() {
                             <Route path="contact" element={<Contact />} />
                             <Route path="login" element={<Login />} />
                             <Route path="signup" element={<Signup />} />
+                        </Route>
+                        <Route path="/userdashboard" element={<LayoutDashboard />}>
+                        <Route path="" element={<HomeDashboard />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>

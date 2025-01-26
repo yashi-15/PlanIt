@@ -21,7 +21,7 @@ const Signup = () => {
         if (response.success) {
             localStorage.setItem("token", response.authToken);
             showAlert("Sign Up Successfull!", "success");
-            navigate("/");
+            navigate("/userdashboard");
         } else {
             showAlert(response.error, "error");
         }
