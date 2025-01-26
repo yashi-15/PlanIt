@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         'red': '#F23834',
-        'linen': '#F0D1A8',
+        'linen': '#f0ddc7',
         'cream' : '#FAF7F2',
         'black' : '#0D0D0C',
         'tasktext' : '#4B332F',
@@ -17,6 +17,7 @@ export default {
         'pink' : '#F87777',
         'ashrose' : '#C4A49F',
         'green' : '#5C9967',
+        'lightgreen' : '#73a17d',
         'gray' : '#63605F',
       }
     },

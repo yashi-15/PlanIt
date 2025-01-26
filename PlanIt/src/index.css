@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ttt{
+    color: #F0D1A8;
+}
+.teett{
+    color: #73a17d;
+}
