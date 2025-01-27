@@ -18,7 +18,7 @@ const Layout = () => {
     <div className="">
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center bg-darkgray">
+                <div className="drawer-content flex flex-col items-center justify-center bg-darkgray text-linen">
                     <Outlet />
                 </div>
                 <LeftMenu />

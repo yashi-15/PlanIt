@@ -13,27 +13,31 @@ import AuthState from "./context/auth/authState";
 import AlertState from "./context/alert/alertState";
 import HomeDashboard from "./components/user-dashboard/HomeDashboard";
 import LayoutDashboard from "./components/user-dashboard/LayoutDashboard";
+import TodayTasks from "./components/user-dashboard/TodayTasks";
+import UpcomingTasks from "./components/user-dashboard/UpcomingTasks";
 
 function App() {
     return (
         <AuthState>
             <NoteState>
                 <AlertState>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route path="" element={<Home />} />
-                            <Route path="mynotes" element={<Notes />} />
-                            <Route path="about" element={<About />} />
-                            <Route path="contact" element={<Contact />} />
-                            <Route path="login" element={<Login />} />
-                            <Route path="signup" element={<Signup />} />
-                        </Route>
-                        <Route path="/userdashboard" element={<LayoutDashboard />}>
-                        <Route path="" element={<HomeDashboard />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={<Layout />}>
+                                <Route path="" element={<Home />} />
+                                <Route path="mynotes" element={<Notes />} />
+                                <Route path="about" element={<About />} />
+                                <Route path="contact" element={<Contact />} />
+                                <Route path="login" element={<Login />} />
+                                <Route path="signup" element={<Signup />} />
+                            </Route>
+                            <Route path="/userdashboard" element={<LayoutDashboard />}>
+                                <Route path="" element={<HomeDashboard />} />
+                                <Route path="today" element={<TodayTasks />} />
+                                <Route path="upcoming" element={<UpcomingTasks />} />
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
                 </AlertState>
             </NoteState>
         </AuthState>
