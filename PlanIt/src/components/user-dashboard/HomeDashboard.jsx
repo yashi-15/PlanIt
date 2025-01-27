@@ -28,7 +28,7 @@ const HomeDashboard = () => {
 
     return (
         <div className="text-linen">
-            <h1>Good {timeOfDay}! {user?.name?.split(" ")[0] || "Guest"}</h1>
+            <h1 className="text-2xl font-bold">Good {timeOfDay}! {user?.name?.split(" ")[0] || "Guest"}</h1>
         </div>
     );
 };
