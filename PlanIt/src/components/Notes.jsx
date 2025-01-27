@@ -23,7 +23,6 @@ const Notes = () => {
             <AddNote />
             <div className="flex justify-center">
                 <div className="">
-                    <h1 className="text-center"> My notes</h1>
                     <p>{notes.length === 0 && "No notes to display"}</p>
                     <div className="grid grid-cols-4 gap-3 justify-items-center px-5 mx-auto">
                         {notes.map((note) => {

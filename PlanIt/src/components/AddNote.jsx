@@ -23,17 +23,17 @@ const AddNote = () => {
         <div className="flex justify-center">
             <div style={{ width: "50%" }}>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="title" className="input input-bordered flex items-center gap-2">
+                    <label htmlFor="title" className="input input-bordered flex items-center gap-2 bg-gray">
                         <input type="text" id="title" name="title" className="grow" placeholder="Title" value={note.title} onChange={onChangeInput} minLength={3} required />
                     </label>
                     <label htmlFor="description" className="flex items-center gap-2">
-                        <textarea placeholder="Description" id="description" name="description" className="textarea textarea-bordered textarea-md w-full" value={note.description} onChange={onChangeInput} minLength={5} required ></textarea>
+                        <textarea placeholder="Description" id="description" name="description" className="textarea textarea-bordered textarea-md w-full bg-gray" value={note.description} onChange={onChangeInput} minLength={5} required ></textarea>
                     </label>
-                    <label htmlFor="tag" className="input input-bordered flex items-center gap-2">
+                    <label htmlFor="tag" className="input input-bordered flex items-center gap-2 bg-gray">
                         <input type="text" id="tag" name="tag" className="grow" placeholder="Tag" value={note.tag} onChange={onChangeInput}/>
                     </label>
                     <div className="text-center">
-                        <button disabled={note.title.length < 3 || note.description.length < 5 } className="btn bg-green" onClick={handleAddNote}>
+                        <button disabled={note.title.length < 3 || note.description.length < 5 } className="btn bg-green border-none" style={{color: "white"}} onClick={handleAddNote}>
                             Add Note
                         </button>
                     </div>
