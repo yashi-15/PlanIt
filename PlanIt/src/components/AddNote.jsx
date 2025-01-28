@@ -37,7 +37,7 @@ const AddNote = () => {
             <div className="flex justify-center">
                 <div style={{ width: "50%" }}>
                     <div className="flex flex-col">
-                        <button className="m-4 p-3 hover:text-red text-xl" ref={addNoteBtn} onClick={()=> setAddTaskOpen(true)}><i class="fa-solid fa-circle-plus"></i> Add Note</button>
+                        <button className="m-4 p-3 hover:text-pink text-xl" ref={addNoteBtn} onClick={()=> setAddTaskOpen(true)}><i class="fa-solid fa-circle-plus"></i> Add Note</button>
                         {addTaskOpen === true &&
                         <div className="flex flex-col gap-2">
                             <label htmlFor="title" className="input input-bordered flex items-center gap-2 bg-gray">
@@ -50,10 +50,10 @@ const AddNote = () => {
                                 <input type="text" id="tag" name="tag" className="grow" placeholder="Tag" value={note.tag} onChange={onChangeInput} />
                             </label>
                             <div className="text-center">
-                                <button className="btn bg-green border-none" style={{ color: "white" }} onClick={() => setAddTaskOpen(false)}>
+                                <button className="btn bg-green hover:bg-lightgreen border-none m-1" style={{ color: "white" }} onClick={() => setAddTaskOpen(false)}>
                                     Cancel
                                 </button>
-                                <button disabled={note.title.length < 3 || note.description.length < 5} className="btn bg-green border-none" style={{ color: "white" }} onClick={handleAddNote}>
+                                <button disabled={note.title.length < 3 || note.description.length < 5} className="btn bg-pink hover:bg-linen border-none m-1" style={{ color: "black" }} onClick={handleAddNote}>
                                     Add Note
                                 </button>
                             </div>
