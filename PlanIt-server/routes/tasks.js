@@ -8,18 +8,28 @@ const fetchuser = require("../middleware/fetchUser")
 ///////////////////////////// ROUTE 1 ////////////////////////////////////
 //////////////////////////// Fetch all tasks of a user [ GET : /api/tasks/fetchalltasks ] Login required ///////////////////////////////////////////////////
  
-router.get('/fetchalltasks', fetchuser , async (req, res)=>{
+router.get('/fetchalltasks', fetchuser, async (req, res) => {
     try {
-        // find tasks of a user by user id
-        const tasks = await Task.find({user : req.user.id })
-        // show found tasks in response
-        res.send(tasks);
+        const { date } = req.body; // Extract the date from the request body
+        // Validate that date is provided
+        if (!date) {
+            return res.status(400).json({ error: "Date is required to fetch tasks." });
+        }
+        // Calculate the start and end of the day for the given date
+        const startOfDay = new Date(date).setHours(0, 0, 0, 0);
+        const endOfDay = new Date(date).setHours(23, 59, 59, 999);
+        // Fetch tasks for the user on the specific date
+        const tasks = await Task.find({
+            user: req.user.id, // Match the logged-in user's ID
+            assignedDate: { $gte: startOfDay, $lte: endOfDay }, // Match tasks within the date range
+        });
+        // Send the fetched tasks as the response
+        res.status(200).json(tasks);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error.");
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).send("Internal Server Error..");
-    }
-} )
+});
 
 
 
@@ -35,12 +45,13 @@ router.post('/addtask', [body("title", "Title should be of atleast 3 characters"
     
     try {
         // destructure the content provided in request as title, description, tag
-        const { title, description, tag } = req.body
+        const { title, description, tag, assignedDate } = req.body
         // create a new task with these values, along with the value of user id 
         const task = new Task({
             title,
             description,
             tag,
+            assignedDate,
             user: req.user.id
         })
         // save the created task 
@@ -61,7 +72,7 @@ router.post('/addtask', [body("title", "Title should be of atleast 3 characters"
 router.put('/updatetask/:id', fetchuser , async (req, res)=>{
     
     try {
-        const { title, description, tag, completed } = req.body
+        const { title, description, tag, completed, assignedDate } = req.body
         // create a newTask object
         const newTask = {};
         // check for each if title/ description/ tag was passed by user, then update that which was passed
@@ -69,6 +80,7 @@ router.put('/updatetask/:id', fetchuser , async (req, res)=>{
         if(description) {newTask.description = description}
         if(tag) {newTask.tag = tag}
         if(completed) {newTask.completed = completed}
+        if(assignedDate) {newTask.assignedDate = assignedDate}
 
         // find the task to be updated using "id"
         let task = await Task.findById(req.params.id)

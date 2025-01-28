@@ -22,6 +22,10 @@ const taskSchema = new Schema ( {
         type: Boolean,
         default: false
     },
+    assignedDate: {
+        type: Date,
+        default: Date.now
+    },
     timeStamp: {
         type: Date,
         default: Date.now
