@@ -14,7 +14,7 @@ app.use(express.json())
 //Available routes are these
 //these routes are defined in some other files in routes folder
 app.use('/api/auth', require('./routes/auth'))
-app.use('/api/notes', require('./routes/notes'))
+app.use('/api/tasks', require('./routes/tasks'))
 
 //app ko run kiya
 app.listen(port, () => {

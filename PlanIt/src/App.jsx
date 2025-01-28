@@ -2,11 +2,11 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
-import Notes from "./components/Notes";
+import Tasks from "./components/Tasks";
 import About from "./components/About";
 import Layout from "./components/Layout";
 import Contact from "./components/Contact";
-import NoteState from "./context/notes/noteState";
+import TaskState from "./context/tasks/taskState";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AuthState from "./context/auth/authState";
@@ -19,13 +19,13 @@ import UpcomingTasks from "./components/user-dashboard/UpcomingTasks";
 function App() {
     return (
         <AuthState>
-            <NoteState>
+            <TaskState>
                 <AlertState>
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Layout />}>
                                 <Route path="" element={<Home />} />
-                                <Route path="mynotes" element={<Notes />} />
+                                <Route path="mytasks" element={<Tasks />} />
                                 <Route path="about" element={<About />} />
                                 <Route path="contact" element={<Contact />} />
                                 <Route path="login" element={<Login />} />
@@ -39,7 +39,7 @@ function App() {
                         </Routes>
                     </BrowserRouter>
                 </AlertState>
-            </NoteState>
+            </TaskState>
         </AuthState>
     );
 }

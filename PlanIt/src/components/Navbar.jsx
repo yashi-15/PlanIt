@@ -28,8 +28,8 @@ const Navbar = () => {
                 <div className="flex-none gap-4">
                     <ul className="menu-horizontal px-1">
                         <li className="p-3">
-                            <NavLink to="/mynotes" className={({ isActive }) => `${isActive ? "text-red" : "text-black"}`}>
-                                My Notes
+                            <NavLink to="/mytasks" className={({ isActive }) => `${isActive ? "text-red" : "text-black"}`}>
+                                My Tasks
                             </NavLink>
                         </li>
                         <li className="p-3">

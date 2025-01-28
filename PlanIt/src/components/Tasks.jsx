@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from "react";
-import noteContext from "../context/notes/noteContext";
-import NoteItem from "./NoteItem";
-import AddNote from "./AddNote";
+import taskContext from "../context/tasks/taskContext";
+import TaskItem from "./TaskItem";
+import AddTask from "./AddTask";
 import { useNavigate } from "react-router-dom";
 
-const Notes = () => {
+const Tasks = () => {
     
     const navigate = useNavigate();
 
-    const { notes, getNotes } = useContext(noteContext);
+    const { tasks, getTasks } = useContext(taskContext);
     useEffect(() => {
         if(localStorage.getItem('token')){
-            getNotes();
+            getTasks();
         }
         else{
             navigate("/login")
@@ -20,13 +20,13 @@ const Notes = () => {
 
     return (
         <>
-            <AddNote />
+            <AddTask />
             <div className="flex justify-center">
                 <div className="">
-                    <p>{notes.length === 0 && "No notes to display"}</p>
+                    <p>{tasks.length === 0 && "No tasks to display"}</p>
                     <div className="grid grid-cols-4 gap-3 justify-items-center px-5 mx-auto">
-                        {notes.map((note) => {
-                            return <NoteItem key={note._id} note={note} />;
+                        {tasks.map((task) => {
+                            return <TaskItem key={task._id} task={task} />;
                         })}
                     </div>
                 </div>
@@ -35,4 +35,4 @@ const Notes = () => {
     );
 };
 
-export default Notes;
+export default Tasks;

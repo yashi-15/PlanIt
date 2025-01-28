@@ -1,10 +1,10 @@
 import React from 'react'
-import Notes from '../Notes'
+import Tasks from '../Tasks'
 
 const TodayTasks = () => {
   return (
     <div>
-      <Notes />
+      <Tasks />
     </div>
   )
 }

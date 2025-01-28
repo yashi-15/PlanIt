@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import NoteContext from "./noteContext";
+import TaskContext from "./taskContext";
 
-const NoteState = (props) => {
+const TaskState = (props) => {
     const host = "http://localhost:5000";
-    const [notes, setNotes] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
-    //Get all notes
-    const getNotes = async () => {
+    //Get all tasks
+    const getTasks = async () => {
         //API call
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        const response = await fetch(`${host}/api/tasks/fetchalltasks`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -16,13 +16,13 @@ const NoteState = (props) => {
             },
         });
         const json = await response.json();
-        setNotes(json);
+        setTasks(json);
     };
 
-    // Add a note
-    const addNote = async (title, description, tag) => {
+    // Add a task
+    const addTask = async (title, description, tag) => {
         //API call
-        const response = await fetch(`${host}/api/notes/addnote`, {
+        const response = await fetch(`${host}/api/tasks/addtask`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -34,13 +34,13 @@ const NoteState = (props) => {
         console.log(json);
 
         //logic to edit on client side
-        setNotes(notes.concat(json));
+        setTasks(tasks.concat(json));
     };
 
-    // Delete a note
-    const deleteNote = async (id) => {
+    // Delete a task
+    const deleteTask = async (id) => {
         //API call
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        const response = await fetch(`${host}/api/tasks/deletetask/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -51,14 +51,14 @@ const NoteState = (props) => {
         console.log(json);
 
         //logic to edit on client side
-        const newNotes = notes.filter((note) => note._id !== id);
-        setNotes(newNotes);
+        const newTasks = tasks.filter((task) => task._id !== id);
+        setTasks(newTasks);
     };
 
-    // Edit a note
-    const editNote = async (id, title, description, tag) => {
+    // Edit a task
+    const editTask = async (id, title, description, tag) => {
         //API call
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        const response = await fetch(`${host}/api/tasks/updatetask/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -70,20 +70,20 @@ const NoteState = (props) => {
         console.log(json);
 
         //logic to edit on client side
-        const newNotes = JSON.parse(JSON.stringify(notes))
-        for (let i = 0; i < newNotes.length; i++) {
-            const note = newNotes[i];
-            if (note._id == id) {
-                newNotes[i].title = title;
-                newNotes[i].description = description;
-                newNotes[i].tag = tag;
+        const newTasks = JSON.parse(JSON.stringify(tasks))
+        for (let i = 0; i < newTasks.length; i++) {
+            const task = newTasks[i];
+            if (task._id == id) {
+                newTasks[i].title = title;
+                newTasks[i].description = description;
+                newTasks[i].tag = tag;
                 break;
             }
         }
-        setNotes(newNotes);
+        setTasks(newTasks);
     };
 
-    return <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote, editNote }}>{props.children}</NoteContext.Provider>;
+    return <TaskContext.Provider value={{ tasks, getTasks, addTask, deleteTask, editTask }}>{props.children}</TaskContext.Provider>;
 };
 
-export default NoteState;
+export default TaskState;
