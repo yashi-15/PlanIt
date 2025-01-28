@@ -37,7 +37,7 @@ const AddTask = () => {
             <div className="flex justify-center">
                 <div style={{ width: "50%" }}>
                     <div className="flex flex-col">
-                        <button className="m-4 p-3 hover:text-pink text-xl" ref={addTaskBtn} onClick={()=> setAddTaskOpen(true)}><i class="fa-solid fa-circle-plus"></i> Add Task</button>
+                        <button className="m-4 p-3 hover:text-pink text-xl" ref={addTaskBtn} onClick={()=> setAddTaskOpen(true)}><i className="fa-solid fa-circle-plus"></i> Add Task</button>
                         {addTaskOpen === true &&
                         <div className="flex flex-col gap-2">
                             <label htmlFor="title" className="input input-bordered flex items-center gap-2 bg-gray">

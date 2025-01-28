@@ -18,6 +18,10 @@ const taskSchema = new Schema ( {
         type: String,
         default: "General"
     },
+    completed: {
+        type: Boolean,
+        default: false
+    },
     timeStamp: {
         type: Date,
         default: Date.now

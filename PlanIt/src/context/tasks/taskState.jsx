@@ -56,7 +56,7 @@ const TaskState = (props) => {
     };
 
     // Edit a task
-    const editTask = async (id, title, description, tag) => {
+    const editTask = async (id, title, description, tag, completed) => {
         //API call
         const response = await fetch(`${host}/api/tasks/updatetask/${id}`, {
             method: "PUT",
@@ -64,7 +64,7 @@ const TaskState = (props) => {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({ title, description, tag }),
+            body: JSON.stringify({ title, description, tag, completed }),
         });
         const json = await response.json();
         console.log(json);
@@ -77,6 +77,7 @@ const TaskState = (props) => {
                 newTasks[i].title = title;
                 newTasks[i].description = description;
                 newTasks[i].tag = tag;
+                newTasks[i].completed = Boolean(completed);
                 break;
             }
         }

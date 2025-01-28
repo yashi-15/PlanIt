@@ -5,12 +5,19 @@ import alertContext from "../context/alert/alertContext";
 
 const TaskItem = (props) => {
     const { task } = props;
-    const { deleteTask } = useContext(taskContext);
-    const {showAlert} = useContext(alertContext)
+    const { editTask, deleteTask } = useContext(taskContext);
+    const { showAlert } = useContext(alertContext);
+
+    const [newtask, setNewTask] = useState(task)
+
+    const handleToggleCompleted = (e) => {
+        setNewTask({ ...task, [e.target.name]: e.target.checked });
+        editTask(newtask._id, newtask.title, newtask.description, newtask.tag, String(!newtask.completed) );
+    }
 
     const handleDeleteTask = () => {
         deleteTask(task._id);
-        showAlert("Deleted successfully!", "success")
+        showAlert("Deleted successfully!", "success");
     };
 
     const [currentTask, setCurrenttask] = useState(null);
@@ -26,12 +33,11 @@ const TaskItem = (props) => {
     return (
         <>
             <div className="card w-80 shadow-xl m-4">
-                
-            {/* Modal */}
-            {currentTask && <EditTaskModal currentTask={currentTask} closeModal={handleCloseModal} /> }
-
+                {/* Modal */}
+                {currentTask && <EditTaskModal currentTask={currentTask} closeModal={handleCloseModal} />}
 
                 <div className="card-body bg-linen">
+                    <input type="checkbox" className="checkbox [--chkbg:theme(colors.green)] [--chkfg:linen]" id="completed" name="completed" checked={Boolean(newtask.completed)} onChange={handleToggleCompleted} />
                     <h2 className="card-title text-black">{task.title}</h2>
                     <p className="text-black">{task.description}</p>
                     <p className="font-light text-black">{new Date(task.timeStamp).toLocaleString()}</p>

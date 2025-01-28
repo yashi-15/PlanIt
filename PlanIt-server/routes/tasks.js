@@ -61,13 +61,14 @@ router.post('/addtask', [body("title", "Title should be of atleast 3 characters"
 router.put('/updatetask/:id', fetchuser , async (req, res)=>{
     
     try {
-        const { title, description, tag } = req.body
+        const { title, description, tag, completed } = req.body
         // create a newTask object
         const newTask = {};
         // check for each if title/ description/ tag was passed by user, then update that which was passed
         if(title) {newTask.title = title}
         if(description) {newTask.description = description}
         if(tag) {newTask.tag = tag}
+        if(completed) {newTask.completed = completed}
 
         // find the task to be updated using "id"
         let task = await Task.findById(req.params.id)
