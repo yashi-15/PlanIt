@@ -27,25 +27,25 @@ const EditTaskModal = (props) => {
     return (
         <div>
             <dialog id="editTaskModal" className="modal">
-                <div className="modal-box">
+                <div className="modal-box bg-pink">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
                     </form>
-                    <h3 className="font-bold text-lg">Edit task!</h3>
+                    <h3 className="font-bold text-lg text-center mb-5">Edit task!</h3>
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="etitle" className="input input-bordered flex items-center gap-2">
+                        <label htmlFor="etitle" className="input input-bordered bg-darkgray flex items-center gap-2">
                             <input type="text" id="etitle" name="etitle" className="grow" placeholder="Title" value={task.etitle} onChange={onChangeInput} minLength={3} required />
                         </label>
                         <label htmlFor="edescription" className="flex items-center gap-2">
-                            <textarea placeholder="Description" id="edescription" name="edescription" className="textarea textarea-bordered textarea-md w-full" value={task.edescription} onChange={onChangeInput} minLength={5} required ></textarea>
+                            <textarea placeholder="Description" id="edescription" name="edescription" className="textarea textarea-bordered textarea-md w-full bg-darkgray" value={task.edescription} onChange={onChangeInput} minLength={5} required ></textarea>
                         </label>
-                        <label htmlFor="etag" className="input input-bordered flex items-center gap-2">
+                        <label htmlFor="etag" className="input input-bordered flex items-center bg-darkgray gap-2">
                             <input type="text" id="etag" name="etag" className="grow" placeholder="Tag" value={task.etag} onChange={onChangeInput} />
                         </label>
                         <div className="text-center">
-                            <button disabled={task.etitle.length < 3 || task.edescription.length < 5 } className="btn bg-green" onClick={handleEditTask}>
-                                Update Task
+                            <button disabled={task.etitle.length < 3 || task.edescription.length < 5 } className="btn border-none shadow-lg bg-linen hover:bg-lightgreen" onClick={handleEditTask}>
+                                Save
                             </button>
                         </div>
                     </div>

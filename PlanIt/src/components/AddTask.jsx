@@ -38,7 +38,7 @@ const AddTask = () => {
                     <div className="flex flex-col">
                         <button className="m-4 p-3 hover:text-pink text-xl" ref={addTaskBtn} onClick={()=> setAddTaskOpen(true)}><i className="fa-solid fa-circle-plus"></i> Add Task</button>
                         {addTaskOpen === true &&
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2" style={{width: "45vw"}}>
                             <label htmlFor="title" className="input input-bordered flex items-center gap-2 bg-gray">
                                 <input type="text" id="title" name="title" className="grow" placeholder="Title" value={task.title} onChange={onChangeInput} minLength={3} required />
                             </label>
