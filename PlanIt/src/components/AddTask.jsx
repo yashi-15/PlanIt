@@ -35,7 +35,6 @@ const AddTask = () => {
     return (
         <>
             <div className="flex justify-center">
-                <div style={{ width: "50%" }}>
                     <div className="flex flex-col">
                         <button className="m-4 p-3 hover:text-pink text-xl" ref={addTaskBtn} onClick={()=> setAddTaskOpen(true)}><i className="fa-solid fa-circle-plus"></i> Add Task</button>
                         {addTaskOpen === true &&
@@ -60,7 +59,6 @@ const AddTask = () => {
                         </div>}
                     </div>
                 </div>
-            </div>
         </>
     );
 };

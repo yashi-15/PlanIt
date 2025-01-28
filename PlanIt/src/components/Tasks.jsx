@@ -21,15 +21,11 @@ const Tasks = () => {
     return (
         <>
             <AddTask />
-            <div className="flex justify-center">
-                <div className="">
+            <div className="flex flex-col divide-y-2 divide-y-reverse divide-gray-500 justify-items align-middle-center w-full my-2 mx-5">
                     <p>{tasks.length === 0 && "No tasks to display"}</p>
-                    <div className="grid grid-cols-4 gap-3 justify-items-center px-5 mx-auto">
                         {tasks.map((task) => {
                             return <TaskItem key={task._id} task={task} />;
                         })}
-                    </div>
-                </div>
             </div>
         </>
     );
