@@ -17,7 +17,7 @@ const Tasks = (props) => {
         else{
             navigate("/login")
         }
-    }, []);
+    }, [date]);
 
     return (
         <>
