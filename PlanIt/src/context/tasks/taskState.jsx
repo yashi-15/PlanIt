@@ -6,9 +6,9 @@ const TaskState = (props) => {
     const [tasks, setTasks] = useState([]);
 
     //Get all tasks
-    const getTasks = async () => {
+    const getTasks = async (assignedDate) => {
         //API call
-        const response = await fetch(`${host}/api/tasks/fetchalltasks`, {
+        const response = await fetch(`${host}/api/tasks/fetchalltasks?date=${encodeURIComponent(assignedDate)}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -16,6 +16,8 @@ const TaskState = (props) => {
             },
         });
         const json = await response.json();
+        console.log(json);
+        
         setTasks(json);
     };
 

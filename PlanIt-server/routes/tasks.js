@@ -10,7 +10,7 @@ const fetchuser = require("../middleware/fetchUser")
  
 router.get('/fetchalltasks', fetchuser, async (req, res) => {
     try {
-        const { date } = req.body; // Extract the date from the request body
+        const { date } = req.query; // Extract the date from the request body
         // Validate that date is provided
         if (!date) {
             return res.status(400).json({ error: "Date is required to fetch tasks." });

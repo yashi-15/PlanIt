@@ -4,14 +4,15 @@ import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
 import { useNavigate } from "react-router-dom";
 
-const Tasks = () => {
+const Tasks = (props) => {
+    const { date } = props;
     
     const navigate = useNavigate();
 
     const { tasks, getTasks } = useContext(taskContext);
     useEffect(() => {
         if(localStorage.getItem('token')){
-            getTasks();
+            getTasks(date);
         }
         else{
             navigate("/login")
